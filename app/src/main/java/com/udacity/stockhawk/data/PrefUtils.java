@@ -10,12 +10,12 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public final class PrefUtils {
+public final class PrefUtils{
 
-    private PrefUtils() {
+    private PrefUtils(){
     }
 
-    public static Set<String> getStocks(Context context) {
+    public static Set<String> getStocks(Context context){
         String stocksKey = context.getString(R.string.pref_stocks_key);
         String initializedKey = context.getString(R.string.pref_stocks_initialized_key);
         String[] defaultStocksList = context.getResources().getStringArray(R.array.default_stocks);
@@ -34,14 +34,13 @@ public final class PrefUtils {
             return defaultStocks;
         }
         return prefs.getStringSet(stocksKey, new HashSet<String>());
-
     }
 
     public static void editStockPref(Context context, String symbol, Boolean add) {
         String key = context.getString(R.string.pref_stocks_key);
         Set<String> stocks = getStocks(context);
 
-        if (add) {
+        if (add){
             stocks.add(symbol);
         } else {
             stocks.remove(symbol);

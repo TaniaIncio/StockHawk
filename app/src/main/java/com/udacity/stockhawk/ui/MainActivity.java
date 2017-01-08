@@ -1,6 +1,7 @@
 package com.udacity.stockhawk.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -45,8 +46,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private StockAdapter adapter;
 
     @Override
-    public void onClick(String symbol) {
+    public void onClick(String symbol, String history) {
         Timber.d("Symbol clicked: %s", symbol);
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra(getString(R.string.extra_history), history);
+        intent.putExtra(getString(R.string.extra_symbol), symbol);
+        startActivity(intent);
     }
 
     @Override
@@ -81,7 +86,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             }
         }).attachToRecyclerView(recyclerView);
 
-
     }
 
     private boolean networkUp() {
@@ -92,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     @Override
-    public void onRefresh() {
+    public void onRefresh(){
 
         QuoteSyncJob.syncImmediately(this);
 
