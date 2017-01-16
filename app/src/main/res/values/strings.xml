@@ -42,4 +42,5 @@
     <string name="extra_symbol" translatable="false">extra_symbol</string>
 
     <string name="description_fab_search" translatable="false">search</string>
+    <string name="empty_stocks_list">Data no found it</string>
 </resources>
