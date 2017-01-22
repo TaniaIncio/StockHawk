@@ -18,19 +18,25 @@ import android.widget.RemoteViewsService;
 import com.udacity.stockhawk.R;
 import com.udacity.stockhawk.data.Contract;
 import com.udacity.stockhawk.data.PrefUtils;
+import com.udacity.stockhawk.ui.MainActivity;
 
 import java.lang.annotation.Target;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
+import java.util.Scanner;
 import java.util.concurrent.ExecutionException;
 
 /**
  * Created by juan on 16/01/2017.
  */
 
-public class StockWidgetFactoryAdapter implements RemoteViewsService.RemoteViewsFactory, LoaderManager.LoaderCallbacks<Cursor> {
+public class StockWidgetFactoryAdapter implements RemoteViewsService.RemoteViewsFactory {
 
     private Cursor data;
     Context context;
@@ -51,12 +57,13 @@ public class StockWidgetFactoryAdapter implements RemoteViewsService.RemoteViews
         percentageFormat.setMaximumFractionDigits(2);
         percentageFormat.setMinimumFractionDigits(2);
         percentageFormat.setPositivePrefix("+");
-        onCreateLoader(1,null);
+
+      //  Log.i("count data","count "+data.getCount());
     }
 
     @Override
     public void onDataSetChanged() {
-
+        Collections.shuffle(Arrays.asList(data), new Random());
     }
 
     @Override
@@ -133,23 +140,7 @@ public class StockWidgetFactoryAdapter implements RemoteViewsService.RemoteViews
         return false;
     }
 
-    @Override
-    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return new CursorLoader(context,
-                Contract.Quote.uri,
-                Contract.Quote.QUOTE_COLUMNS,
-                null, null, Contract.Quote.COLUMN_SYMBOL);
-    }
-
-    @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        if (data.getCount() != 0) {
-            this.data = data;
-        }
-    }
-
-    @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-        data = null;
+    public void setCursor(Cursor cursor){
+        this.data = cursor;
     }
 }

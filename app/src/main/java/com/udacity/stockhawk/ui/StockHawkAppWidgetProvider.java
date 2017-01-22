@@ -1,16 +1,20 @@
 package com.udacity.stockhawk.ui;
 
+import android.app.LoaderManager;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.Loader;
+import android.database.Cursor;
+import android.os.Bundle;
 import android.widget.RemoteViews;
 import com.udacity.stockhawk.R;
 import com.udacity.stockhawk.widget.StockWidgetService;
 
-public class StockHawkAppWidgetProvider extends AppWidgetProvider {
+public class StockHawkAppWidgetProvider extends AppWidgetProvider implements LoaderManager.LoaderCallbacks<Cursor> {
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -52,4 +56,18 @@ public class StockHawkAppWidgetProvider extends AppWidgetProvider {
     }
 
 
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        return null;
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+
+    }
 }
