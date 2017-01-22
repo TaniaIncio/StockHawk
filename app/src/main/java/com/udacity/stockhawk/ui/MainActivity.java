@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @BindView(R.id.error)
     TextView error;
     private StockAdapter adapter;
+    Cursor data;
 
     @Override
     public void onClick(String symbol, String history) {
@@ -140,13 +141,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         Log.i("uri",Contract.Quote.uri.toString());
-        Context context = this.getApplicationContext();
         return new CursorLoader(this,
                 Contract.Quote.uri,
                 Contract.Quote.QUOTE_COLUMNS,
                 null, null, Contract.Quote.COLUMN_SYMBOL);
     }
-Cursor data;
+
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         swipeRefreshLayout.setRefreshing(false);
@@ -154,10 +154,7 @@ Cursor data;
             error.setVisibility(View.GONE);
         }
         this.data = data;
-        if(mWidget){
-            mLoadCursor.getCursor(data);
-        }else
-            adapter.setCursor(data);
+        adapter.setCursor(data);
     }
 
 
@@ -198,13 +195,5 @@ Cursor data;
         return super.onOptionsItemSelected(item);
     }
 
-    Boolean mWidget=false;
-    public void getData(){
-        mWidget = true;
-        getSupportLoaderManager().initLoader(STOCK_LOADER, null, this);
-    }
-    LoadCursor mLoadCursor;
-    public  interface LoadCursor{
-        public void getCursor(Cursor cursor);
-    }
+
 }

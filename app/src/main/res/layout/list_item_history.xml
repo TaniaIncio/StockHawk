@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
+    android:background="@android:color/white"
     android:minHeight="?attr/listPreferredItemHeight">
     <TextView
         android:layout_width="match_parent"
@@ -12,7 +13,8 @@
         android:gravity="right"
         android:layout_weight="1"
         android:id="@+id/txt_date"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="@dimen/sp_textview"
         tools:text="12/01/2016"/>
     <TextView
         android:layout_width="match_parent"
@@ -20,7 +22,8 @@
         android:gravity="right"
         android:layout_weight="1"
         android:id="@+id/txt_value"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="@dimen/sp_textview"
         tools:text="123.41"/>
 
 </LinearLayout>

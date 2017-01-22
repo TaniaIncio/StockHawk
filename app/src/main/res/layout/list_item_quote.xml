@@ -2,42 +2,60 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="?android:attr/listPreferredItemHeight"
-    android:gravity="center_vertical"
+    android:layout_height="wrap_content"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
-    android:paddingStart="16dp"
-    android:paddingEnd="16dp">
-
-    <TextView
-        android:id="@+id/symbol"
-        style="@style/StockSymbolTextStyle"
-        android:layout_width="wrap_content"
+    android:background="@android:color/white">
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="left|center_vertical"
-        tools:text="GOOG" />
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="right">
-
+        card_view:cardCornerRadius="0dp"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:layout_margin="@dimen/margin_cardview"
+        card_view:cardElevation="@dimen/margin_elevation_cardview">
+        <LinearLayout
+            android:layout_width="match_parent"
+           android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@android:color/white"
+            android:layout_height="?android:attr/listPreferredItemHeight"
+            >
         <TextView
-            android:id="@+id/price"
-            style="@style/BidPriceTextStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10sp"
-            tools:text="1000.00" />
+            android:id="@+id/symbol"
+            style="@style/StockSymbolTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:background="@color/colorPrimary"
+            tools:text="GOOG" />
 
-        <TextView
-            android:id="@+id/change"
-            style="@style/PercentChangeTextStyle"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/percent_change_pill_green"
-            android:paddingStart="3dp"
-            android:paddingEnd="3dp"
-            tools:text="100%" />
+            android:layout_weight="3"
+            android:gravity="right">
+
+            <TextView
+                android:id="@+id/price"
+                style="@style/BidPriceTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:textColor="@android:color/darker_gray"
+                tools:text="1000.00" />
+
+            <TextView
+                android:id="@+id/change"
+                style="@style/PercentChangeTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/percent_change_pill_green"
+                android:paddingStart="@dimen/margin_textview__cardview"
+                android:paddingEnd="@dimen/margin_textview__cardview"
+                tools:text="100%" />
     </LinearLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>
 </LinearLayout>

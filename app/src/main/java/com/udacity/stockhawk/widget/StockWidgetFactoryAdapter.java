@@ -1,5 +1,6 @@
 package com.udacity.stockhawk.widget;
 
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -19,6 +20,7 @@ import com.udacity.stockhawk.R;
 import com.udacity.stockhawk.data.Contract;
 import com.udacity.stockhawk.data.PrefUtils;
 import com.udacity.stockhawk.ui.MainActivity;
+import com.udacity.stockhawk.ui.StockHawkAppWidgetProvider;
 
 import java.lang.annotation.Target;
 import java.text.DecimalFormat;
@@ -58,7 +60,6 @@ public class StockWidgetFactoryAdapter implements RemoteViewsService.RemoteViews
         percentageFormat.setMinimumFractionDigits(2);
         percentageFormat.setPositivePrefix("+");
 
-      //  Log.i("count data","count "+data.getCount());
     }
 
     @Override
@@ -95,28 +96,19 @@ public class StockWidgetFactoryAdapter implements RemoteViewsService.RemoteViews
         float rawAbsoluteChange = data.getFloat(Contract.Quote.POSITION_ABSOLUTE_CHANGE);
         float percentageChange = data.getFloat(Contract.Quote.POSITION_PERCENTAGE_CHANGE);
 
-       /* if (rawAbsoluteChange > 0) {
-            holder.change.setBackgroundResource(R.drawable.percent_change_pill_green);
-        } else {
-            holder.change.setBackgroundResource(R.drawable.percent_change_pill_red);
-        }*/
-
-        String change = dollarFormatWithPlus.format(rawAbsoluteChange);
         String percentage = percentageFormat.format(percentageChange / 100);
 
         views.setTextViewText(R.id.symbol, data.getString(Contract.Quote.POSITION_SYMBOL));
-        views.setTextViewText(R.id.symbol,data.getString(Contract.Quote.POSITION_PRICE));
-
+        views.setTextViewText(R.id.price,dollarFormat.format(data.getFloat(Contract.Quote.POSITION_PRICE)));
+        views.setTextViewText(R.id.change,percentage);
         /*****/
+        final Intent i = new Intent();
+        final Bundle extra = new Bundle();
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        i.putExtras(extra);
+        i.setAction(StockHawkAppWidgetProvider.INTENT_ACTION);
+        views.setOnClickFillInIntent(R.id.linear_widget, i);
 
-        final Intent fillInIntent = new Intent();
-        /*String locationSetting =
-                Utility.getPreferredLocation(DetailWidgetRemoteViewsService.this);
-        Uri weatherUri = WeatherContract.WeatherEntry.buildWeatherLocationWithDate(
-                locationSetting,
-                dateInMillis);
-        fillInIntent.setData(weatherUri);*/
-        views.setOnClickFillInIntent(R.id.linear_widget, fillInIntent);
         return views;
     }
 

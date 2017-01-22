@@ -9,6 +9,7 @@
     android:paddingEnd="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
+    android:background="@android:color/white"
     tools:context="com.udacity.stockhawk.ui.DetailActivity">
 
     <LinearLayout
@@ -19,12 +20,16 @@
             android:layout_height="wrap_content"
             android:text="@string/title_recycler_date"
             android:gravity="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/sp_textview"
             android:layout_weight="1"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/title_recycler_value"
             android:gravity="center"
+            android:textSize="@dimen/sp_textview"
+            android:textColor="@color/colorPrimary"
             android:layout_weight="1"/>
     </LinearLayout>
     <android.support.v7.widget.RecyclerView
